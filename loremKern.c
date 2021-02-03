@@ -12,7 +12,7 @@
 
 #include "list_word.h"
 
-#define LOG(str) (printk(KERN_ALERT "SIMPLE DRIVER: %s\n", str))
+#define LOG(str) (printk(KERN_ALERT "LOREM_KERN: %s\n", str))
 
 MODULE_LICENSE("Dual BSD/GPL");
 MODULE_AUTHOR("Celeste");
@@ -84,16 +84,16 @@ static ssize_t my_write(struct file *filp, const char *buf, size_t len, loff_t *
 static int __init hello_init(void)
 {
     LOG("initialisation");
-    if (register_chrdev_region(dev, 1, "simple_drv_dev") < 0) { // allocation of the major and minor
+    if (register_chrdev_region(dev, 1, "loremKern_dev") < 0) { // allocation of the major and minor
 	    LOG("error can't create the dev\n");
         return (-1);
     }
-    dev_class = class_create(THIS_MODULE, "simple_drv_class");
+    dev_class = class_create(THIS_MODULE, "loremKern_class");
     if (dev_class == NULL) {
 	    LOG("error can't create the class\n");
         goto r_device;
     }
-    if (device_create(dev_class, NULL, dev, NULL, "simple_drv_device") == NULL) {
+    if (device_create(dev_class, NULL, dev, NULL, "loremKern") == NULL) {
 	    LOG("error can't create the device\n");
         goto r_class;
     }
@@ -117,7 +117,7 @@ static void __exit hello_exit(void)
     device_destroy(dev_class, dev);
     class_destroy(dev_class);
     unregister_chrdev_region(dev, 1); // unalloate the major and minor
-	LOG("the hello_world module exit succesfully\n");
+	LOG("the loremKern module exit succesfully\n");
 }
 
 module_init(hello_init);

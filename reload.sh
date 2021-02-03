@@ -2,6 +2,6 @@
 
 make
 
-rmmod hello_world
-insmod hello_world.ko
+rmmod loremKern
+insmod loremKern.ko
 
